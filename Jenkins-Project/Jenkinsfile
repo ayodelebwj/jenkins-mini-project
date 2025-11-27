@@ -6,7 +6,7 @@ pipeline {
     AWS_SECRET_ACCESS_KEY = credentials ('aws-secret-access-key')
     AWS_ACCESS_KEY_ID = credentials ('aws-access-key-id')
     AWS_DEFAULT_REGION = 'us-east-1'
-
+    SOURCE_AMI = credentials ('source-ami')
     }
 
     stages {
@@ -17,7 +17,7 @@ pipeline {
                 url: 'https://github.com/ayodelebwj/jenkins-mini-project.git'
             }
         }
-        
+
         stage('Build AMI') {
             steps {
                 dir ('packer') {
