@@ -12,6 +12,7 @@ packer {
 #============================================
 #Provision Java AMI Templates
 #============================================
+
 data "amazon-parameterstore" "ubuntu_2404" {
   name = "/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id"
 }
@@ -21,8 +22,6 @@ source "amazon-ebs" "java-vm-template-root" {
   region          = "us-east-1"
   instance_type   = "t2.micro"
   ssh_username    = "ubuntu"
-  #source_ami      = "ami-XYZ==========ABC"
-  #ami_name      = "my-ubuntu2404-ami-{{timestamp}}"
   source_ami    = data.amazon-parameterstore.ubuntu_2404.value
   ami_name        = "java-ami"
   #ami_description = "Amazon Linux 2 custom AMI with java and python"
